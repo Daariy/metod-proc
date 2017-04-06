@@ -126,7 +126,7 @@ void In(List &l, ifstream &ifst)
 {
 	if (ifst.fail())
 	{
-		cout << "Error: Unable to open input file" << endl;
+		cerr << "Error: Unable to open input file" << endl;
 		return;
 	}
 	else
@@ -140,31 +140,64 @@ void In(List &l, ifstream &ifst)
 	ifst.close();
 }
 
-void Writeinfo(WisdomItem &wisd, ofstream &ofst)
+void Writeinfo(WisdomItem &wisd, ofstream &ofst, int des)
 {
-	if (wisd.k == AFORYSM)
-	{
-
-		OutA(*((Aforysm*)wisd.someType), ofst);
-		ofst << wisd.Text << endl;
-		OutA(*((Aforysm*)wisd.someType), cout);
-		cout << wisd.Text << endl;
-		ofst << "The grade of the following statement is: " << wisd.Grade << endl;
-		cout << "The grade of the following statement is: " << wisd.Grade << endl;
+	if (des == 1)
+	{	
+		if (wisd.k == AFORYSM)
+		{
+			OutA(*((Aforysm*)wisd.someType), ofst);
+			ofst << wisd.Text << endl;
+			OutA(*((Aforysm*)wisd.someType), cout);
+			cout << wisd.Text << endl;
+			ofst << "The grade of the following statement is: " << wisd.Grade << endl;
+			cout << "The grade of the following statement is: " << wisd.Grade << endl;
+		}
 	}
-	if (wisd.k == POSLOVICA)
+	if (des == 2)
 	{
-
-		OutP(*((Poslovica*)wisd.someType), ofst);
-		ofst << wisd.Text << endl;
-		OutP(*((Poslovica*)wisd.someType), cout);
-		cout << wisd.Text << endl;
-		ofst << "The grade of the following statement is: " << wisd.Grade << endl;
-		cout << "The grade of the following statement is: " << wisd.Grade << endl;
+		if (wisd.k == POSLOVICA)
+		{
+			OutP(*((Poslovica*)wisd.someType), ofst);
+			ofst << wisd.Text << endl;
+			OutP(*((Poslovica*)wisd.someType), cout);
+			cout << wisd.Text << endl;
+			ofst << "The grade of the following statement is: " << wisd.Grade << endl;
+			cout << "The grade of the following statement is: " << wisd.Grade << endl;
+		}
+	}
+	if (des == 0)
+	{
+		if (wisd.k == AFORYSM)
+		{
+			OutA(*((Aforysm*)wisd.someType), ofst);
+			ofst << wisd.Text << endl;
+			OutA(*((Aforysm*)wisd.someType), cout);
+			cout << wisd.Text << endl;
+			ofst << "The grade of the following statement is: " << wisd.Grade << endl;
+			cout << "The grade of the following statement is: " << wisd.Grade << endl;
+		}
+		if (wisd.k == POSLOVICA)
+		{
+			OutP(*((Poslovica*)wisd.someType), ofst);
+			ofst << wisd.Text << endl;
+			OutP(*((Poslovica*)wisd.someType), cout);
+			cout << wisd.Text << endl;
+			ofst << "The grade of the following statement is: " << wisd.Grade << endl;
+			cout << "The grade of the following statement is: " << wisd.Grade << endl;
+		}
+		if (wisd.k == RIDDLE)
+		{
+			OutP(*((Riddle*)wisd.someType), ofst);
+			ofst << wisd.Text << endl;
+			OutP(*((Riddle*)wisd.someType), cout);
+			cout << wisd.Text << endl;
+			ofst << "The grade of the following statement is: " << wisd.Grade << endl;
+			cout << "The grade of the following statement is: " << wisd.Grade << endl;
+		}
 	}
 }
-
-void Out(List &l, ofstream &ofst)
+void Out(List &l, ofstream &ofst, int des)
 {
 	if (ofst.fail())
 	{
@@ -187,36 +220,9 @@ void Out(List &l, ofstream &ofst)
 		WisdomItem* current = new WisdomItem;
 		for (int i = 0; i < l.size; i++)
 		{
-
 			l.Current = l.Current->Next;
-
 			current = (WisdomItem*)l.Current->item;
-			Writeinfo(*current, ofst);
-			if (current->k == AFORYSM)
-			{
-
-				OutA(*((Aforysm*)current->someType), ofst);
-				ofst << current->Text << endl;
-				OutA(*((Aforysm*)current->someType), cout);
-				cout << current->Text << endl;
-
-			}
-			if (current->k == POSLOVICA)
-			{
-
-				OutP(*((Poslovica*)current->someType), ofst);
-				ofst << current->Text << endl;
-				OutP(*((Poslovica*)current->someType), cout);
-				cout << current->Text << endl;
-			}
-			if (current->k == RIDDLE)
-			{
-
-				OutR(*((Riddle*)current->someType), ofst);
-				ofst << current->Text << endl;
-				OutR(*((Riddle*)current->someType), cout);
-				cout << current->Text << endl;
-			}
+			Writeinfo(*current, ofst, des);
 		}
 
 		current = nullptr;

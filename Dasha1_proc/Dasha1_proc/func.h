@@ -52,4 +52,4 @@ void OutR(Riddle &ps, ostream &ofst);
 void Clear(List &l);
 void Add(List &l, WisdomItem &el);
 void In(List &l, ifstream &ifst);
-void Out(List &l, ofstream &ofst);
+void Out(List &l, ofstream &ofst, int des);
