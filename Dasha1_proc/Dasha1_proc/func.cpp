@@ -29,11 +29,11 @@ WisdomItem* In(ifstream &ifst)
 	{
 	case 1:
 	{		  ws = new WisdomItem;
-	ifst.getline(ws->Text, 256);
-	ws->k = AFORYSM;
-	ws->someType = (void*)Inn(ifst);
-	ws->quantityOfSpecialSymbols = ws->CountSighns(ws->Text);
-	return ws;
+		ifst.getline(ws->Text, 256);
+		ws->k = AFORYSM;
+		ws->someType = (void*)Inn(ifst);
+		ws->quantityOfSpecialSymbols = ws->CountSighns(ws->Text);
+		return ws;
 	}
 	case 2:
 	{
@@ -117,12 +117,16 @@ void Writeinfo(WisdomItem &wisd, ofstream &ofst)
 {
 	if (wisd.k == AFORYSM)
 	{
+
+
 		OutA(*((Aforysm*)wisd.someType), ofst);
 		ofst << wisd.Text << endl;
 		OutA(*((Aforysm*)wisd.someType), cout);
 		cout << wisd.Text << endl;
 		ofst << "Quantity of special symbols in the folowing aforysm: " << wisd.CountSighns(wisd.Text) << endl;
 		cout << "Quantity of special symbols in the folowing aforysm: " << wisd.CountSighns(wisd.Text) << endl;
+
+
 	}
 	if (wisd.k == POSLOVICA)
 	{
@@ -134,6 +138,7 @@ void Writeinfo(WisdomItem &wisd, ofstream &ofst)
 		ofst << "Quantity of special symbols in the folowing poslovica: " << wisd.CountSighns(wisd.Text) << endl;
 		cout << "Quantity of special symbols in the folowing poslovica: " << wisd.CountSighns(wisd.Text) << endl;
 	}
+
 }
 void Out(List &l, ofstream &ofst)
 {
@@ -163,7 +168,6 @@ void Out(List &l, ofstream &ofst)
 
 			current = (WisdomItem*)l.Current->item;
 			Writeinfo(*current, ofst);
-
 		}
 
 		current = nullptr;
@@ -174,4 +178,43 @@ void Out(List &l, ofstream &ofst)
 		ofst << result;
 		ofst.close();
 	}
+}
+void Sort(List &l)
+{
+	List::node *s, *ptr;
+	WisdomItem *temp;
+	if (l.Tail == nullptr)
+	{
+		return;
+	}
+	s = l.Tail->Next;
+
+	while (s != l.Tail)
+	{
+		ptr = s->Next;
+		while (ptr != l.Tail->Next)
+		{
+			if (ptr != l.Tail->Next)
+			{
+				if (!Compare(*s->item, *ptr->item))
+				{
+					temp = s->item;
+					s->item = ptr->item;
+					ptr->item = temp;
+				}
+			}
+			else
+			{
+				break;
+			}
+			ptr = ptr->Next;
+		}
+		s = s->Next;
+	}
+}
+
+
+bool Compare(WisdomItem item1, WisdomItem item2)
+{
+	return item1.quantityOfSpecialSymbols < item2.quantityOfSpecialSymbols;
 }
