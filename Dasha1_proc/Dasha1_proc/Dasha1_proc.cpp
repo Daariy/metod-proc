@@ -1,6 +1,5 @@
 // Dasha1_proc.cpp: определяет точку входа для консольного приложения.
 //
-
 #include "stdafx.h"
 #include <iostream>
 #include <stdlib.h>
@@ -11,27 +10,27 @@ using namespace std;
 
 int main(int argc, char* argv[])
 {
-	setlocale(LC_ALL, "Rus");
 	if (argc != 3)
 	{
-		cout << "Ошибка: входной и/или выходной файл отсутствует!" << endl;
+		cerr << "Error: Input and/or output filenames are missing" << endl;
 		return 0;
 	}
 	else
 	{
-
 		List l;
-		ifstream ifst(argv[1]);
-		//ifstream ifst("in.txt");
+		ifstream ifst(argv[1], ios::in | ios::_Nocreate);
 		In(l, ifst);
-		ofstream outputFile(argv[2]);
-		//ofstream outputFile("out.txt");
-		Out(l, outputFile);
+		ofstream outputFile(argv[2], ios::out | ios::trunc);
+		int des = 0;
+		cout << "What you want?" << endl << "0-All!" << endl << "1-OnlyAforism!" << endl << "2-OnlyPoslovica!" << endl << "3-OnlyRiddle!" << endl;
+		cout << "Please, Enter number: ";
+		cin >> des;
+		system("cls");
+		Out(l, outputFile, des);
 		Clear(l);
-		Out(l, outputFile);
+		outputFile.open(argv[2], ios::out | ios::app);
+		Out(l, outputFile, des);
 	}
 	system("pause");
 	return 0;
-
-
 }
