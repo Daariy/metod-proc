@@ -11,6 +11,7 @@ struct Aforysm
 struct Poslovica
 {
 	char Country[256];
+
 };
 
 struct  WisdomItem
@@ -20,6 +21,23 @@ struct  WisdomItem
 	key k;
 
 	void* someType;
+	int CountSighns(char* Text)
+	{
+		char c;
+		int count = 0;
+		for (int i = 0; i < strlen(Text); i++)
+		{
+			c = Text[i];
+			if (c == ',' || c == '.' || c == '?' || c == '!')
+			{
+				count++;
+			}
+		}
+		/*cout << "Quantity of special symbols : " << count << endl;
+		ofst << "Quantity of special symbols : " << count << endl;*/
+		return count;
+	}
+	int quantityOfSpecialSymbols = 0;
 };
 
 struct List
@@ -45,3 +63,4 @@ void Clear(List &l);
 void Add(List &l, WisdomItem &el);
 void In(List &l, ifstream &ifst);
 void Out(List &l, ofstream &ofst);
+
