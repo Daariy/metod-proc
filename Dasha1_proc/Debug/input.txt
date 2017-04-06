@@ -1,9 +1,12 @@
 1
 Aforysm1!!!
 AforysmAuthor1
+3
 2
 Poslovica1..
 PoslovicaCountry1
-2
-Poslovica2!!!!
-PoslovicaCountry2
+4
+3
+Riddle1
+RiddleAnswer1
+7
