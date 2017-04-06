@@ -5,7 +5,11 @@ AforysmAuthor1
 2
 Poslovica1..
 PoslovicaCountry1
-4
+5
+2
+Poslovica1
+PoslovicaCountry1
+6
 3
 Riddle1
 RiddleAnswer1

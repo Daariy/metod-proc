@@ -1,6 +1,10 @@
 #TargetFrameworkVersion=v4.0:PlatformToolSet=v140:EnableManagedIncrementalBuild=false:VCToolArchitecture=Native32Bit:WindowsTargetPlatformVersion=8.1
 <<<<<<< HEAD
+<<<<<<< HEAD
 Debug|Win32|C:\Users\Евгений\Documents\Методы программирования\Даша\2\New Sort\Dasha1_proc\|
+=======
+Debug|Win32|C:\Users\Евгений\Documents\Методы программирования\Даша\2\New Field\Dasha1_proc\|
+>>>>>>> refs/remotes/origin/NewClass
 =======
 Debug|Win32|C:\Users\Евгений\Documents\Методы программирования\Даша\2\New Class\Dasha1_proc\|
 >>>>>>> refs/remotes/origin/NewClass

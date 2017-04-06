@@ -1,6 +1,5 @@
 // Dasha1_proc.cpp: определяет точку входа для консольного приложения.
 //
-
 #include "stdafx.h"
 #include <iostream>
 #include <stdlib.h>

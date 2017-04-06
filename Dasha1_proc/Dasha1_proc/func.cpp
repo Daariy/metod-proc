@@ -10,7 +10,6 @@ Aforysm* Inn(ifstream &ifst)
 	Aforysm* af = new Aforysm;
 	ifst.getline(af->Author, 256);
 	return af;
-
 }
 
 Poslovica* Inc(ifstream &ifst)
@@ -37,12 +36,13 @@ WisdomItem* In(ifstream &ifst)
 	switch (num)
 	{
 	case 1:
-	{
+	{		  
 		ws = new WisdomItem;
 		ifst.getline(ws->Text, 256);
 		ws->k = AFORYSM;
 		ws->someType = (void*)Inn(ifst);
 		ws->quantityOfSpecialSymbols = ws->CountSighns(ws->Text);
+		ifst >> ws->Grade;
 		return ws;
 	}
 	case 2:
@@ -52,6 +52,7 @@ WisdomItem* In(ifstream &ifst)
 		ws->k = POSLOVICA;
 		ws->someType = (void*)Inc(ifst);
 		ws->quantityOfSpecialSymbols = ws->CountSighns(ws->Text);
+		ifst >> ws->Grade;
 		return ws;
 	}
 	case 3:
@@ -61,6 +62,7 @@ WisdomItem* In(ifstream &ifst)
 		ws->k = RIDDLE;
 		ws->someType = (void*)Inr(ifst);
 		ws->quantityOfSpecialSymbols = ws->CountSighns(ws->Text);
+		ifst >> ws->Grade;
 		return ws;
 	}
 	default:
@@ -145,15 +147,14 @@ void Writeinfo(WisdomItem &wisd, ofstream &ofst)
 {
 	if (wisd.k == AFORYSM)
 	{
-
-
 		OutA(*((Aforysm*)wisd.someType), ofst);
 		ofst << wisd.Text << endl;
 		OutA(*((Aforysm*)wisd.someType), cout);
 		cout << wisd.Text << endl;
 		ofst << "Quantity of special symbols in the folowing aforysm: " << wisd.CountSighns(wisd.Text) << endl;
 		cout << "Quantity of special symbols in the folowing aforysm: " << wisd.CountSighns(wisd.Text) << endl;
-
+		ofst << "The grade of the following statement is: " << wisd.Grade << endl;
+		cout << "The grade of the following statement is: " << wisd.Grade << endl;
 
 	}
 	if (wisd.k == POSLOVICA)
@@ -165,6 +166,8 @@ void Writeinfo(WisdomItem &wisd, ofstream &ofst)
 		cout << wisd.Text << endl;
 		ofst << "Quantity of special symbols in the folowing poslovica: " << wisd.CountSighns(wisd.Text) << endl;
 		cout << "Quantity of special symbols in the folowing poslovica: " << wisd.CountSighns(wisd.Text) << endl;
+		ofst << "The grade of the following statement is: " << wisd.Grade << endl;
+		cout << "The grade of the following statement is: " << wisd.Grade << endl;
 	}
 }
 
@@ -233,8 +236,8 @@ void Out(List &l, ofstream &ofst)
 		ofst << result;
 		ofst.close();
 	}
-
 }
+
 void Sort(List &l)
 {
 	List::node *s, *ptr;
