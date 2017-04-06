@@ -10,7 +10,6 @@ Aforysm* Inn(ifstream &ifst)
 	Aforysm* af = new Aforysm;
 	ifst.getline(af->Author, 256);
 	return af;
-
 }
 
 Poslovica* Inc(ifstream &ifst)
@@ -37,11 +36,12 @@ WisdomItem* In(ifstream &ifst)
 	switch (num)
 	{
 	case 1:
-	{
+	{		  
 		ws = new WisdomItem;
 		ifst.getline(ws->Text, 256);
 		ws->k = AFORYSM;
 		ws->someType = (void*)Inn(ifst);
+		ifst >> ws->Grade;
 		return ws;
 	}
 	case 2:
@@ -50,6 +50,7 @@ WisdomItem* In(ifstream &ifst)
 		ifst.getline(ws->Text, 256);
 		ws->k = POSLOVICA;
 		ws->someType = (void*)Inc(ifst);
+		ifst >> ws->Grade;
 		return ws;
 	}
 	case 3:
@@ -58,6 +59,7 @@ WisdomItem* In(ifstream &ifst)
 		ifst.getline(ws->Text, 256);
 		ws->k = RIDDLE;
 		ws->someType = (void*)Inr(ifst);
+		ifst >> ws->Grade;
 		return ws;
 	}
 	default:
@@ -138,11 +140,35 @@ void In(List &l, ifstream &ifst)
 	ifst.close();
 }
 
+void Writeinfo(WisdomItem &wisd, ofstream &ofst)
+{
+	if (wisd.k == AFORYSM)
+	{
+
+		OutA(*((Aforysm*)wisd.someType), ofst);
+		ofst << wisd.Text << endl;
+		OutA(*((Aforysm*)wisd.someType), cout);
+		cout << wisd.Text << endl;
+		ofst << "The grade of the following statement is: " << wisd.Grade << endl;
+		cout << "The grade of the following statement is: " << wisd.Grade << endl;
+	}
+	if (wisd.k == POSLOVICA)
+	{
+
+		OutP(*((Poslovica*)wisd.someType), ofst);
+		ofst << wisd.Text << endl;
+		OutP(*((Poslovica*)wisd.someType), cout);
+		cout << wisd.Text << endl;
+		ofst << "The grade of the following statement is: " << wisd.Grade << endl;
+		cout << "The grade of the following statement is: " << wisd.Grade << endl;
+	}
+}
+
 void Out(List &l, ofstream &ofst)
 {
 	if (ofst.fail())
 	{
-		cout << "Error: Unable to open output file" << endl;
+		cerr << "Error: Unable to open output file" << endl;
 		return;
 	}
 	else
@@ -165,6 +191,7 @@ void Out(List &l, ofstream &ofst)
 			l.Current = l.Current->Next;
 
 			current = (WisdomItem*)l.Current->item;
+			Writeinfo(*current, ofst);
 			if (current->k == AFORYSM)
 			{
 
@@ -200,7 +227,4 @@ void Out(List &l, ofstream &ofst)
 		ofst << result;
 		ofst.close();
 	}
-
 }
-
-

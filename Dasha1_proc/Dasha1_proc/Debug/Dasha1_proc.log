@@ -1,4 +1,9 @@
 ﻿  func.cpp
+<<<<<<< HEAD
+c:\users\евгений\documents\методы программирования\даша\2\new field\dasha1_proc\dasha1_proc\func.cpp(50): warning C4715: In: значение возвращается не при всех путях выполнения
+  Dasha1_proc.vcxproj -> C:\Users\Евгений\Documents\Методы программирования\Даша\2\New Field\Dasha1_proc\Debug\Dasha1_proc.exe
+  Dasha1_proc.vcxproj -> C:\Users\Евгений\Documents\Методы программирования\Даша\2\New Field\Dasha1_proc\Debug\Dasha1_proc.pdb (Full PDB)
+=======
   Создание кода...
 c:\users\евгений\documents\методы программирования\даша\2\new class\dasha1_proc\dasha1_proc\func.cpp(66): warning C4715: In: значение возвращается не при всех путях выполнения
   Компиляция...
@@ -6,3 +11,4 @@ c:\users\евгений\documents\методы программирования\
   Создание кода...
   Dasha1_proc.vcxproj -> C:\Users\Евгений\Documents\Методы программирования\Даша\2\New Class\Dasha1_proc\Debug\Dasha1_proc.exe
   Dasha1_proc.vcxproj -> C:\Users\Евгений\Documents\Методы программирования\Даша\2\New Class\Dasha1_proc\Debug\Dasha1_proc.pdb (Full PDB)
+>>>>>>> refs/remotes/origin/NewClass

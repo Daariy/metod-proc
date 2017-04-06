@@ -1,6 +1,5 @@
 // Dasha1_proc.cpp: определяет точку входа для консольного приложения.
 //
-
 #include "stdafx.h"
 #include <iostream>
 #include <stdlib.h>
@@ -27,7 +26,6 @@ int main(int argc, char* argv[])
 		outputFile.open(argv[2], ios::out | ios::app);
 		Out(l, outputFile);
 	}
-
-	system("pause");
+	system("Pause");
 	return 0;
 }
