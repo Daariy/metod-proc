@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 		In(l, ifst);
 		ofstream outputFile(argv[2], ios::out | ios::trunc);
 		int des = 0;
-		cout << "What you want?" << endl << "0-All!" << endl << "1-OnlyAforism!" << endl << "2-OnlyPoslovica!" << endl;
+		cout << "What you want?" << endl << "0-All!" << endl << "1-OnlyAforism!" << endl << "2-OnlyPoslovica!" << endl << "3-OnlyRiddle!" << endl;
 		cout << "Please, Enter number: ";
 		cin >> des;
 		system("cls");
@@ -31,6 +31,6 @@ int main(int argc, char* argv[])
 		outputFile.open(argv[2], ios::out | ios::app);
 		Out(l, outputFile, des);
 	}
-	system("Pause");
+	system("pause");
 	return 0;
 }

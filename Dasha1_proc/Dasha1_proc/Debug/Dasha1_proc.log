@@ -1,4 +1,12 @@
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+﻿  Dasha1_proc.cpp
+c:\users\евгений\documents\методы программирования\даша\2\new sort\dasha1_proc\dasha1_proc\func.h(26): warning C4018: <: несоответствие типов со знаком и без знака
+  Dasha1_proc.vcxproj -> C:\Users\Евгений\Documents\Методы программирования\Даша\2\New Sort\Dasha1_proc\Debug\Dasha1_proc.exe
+  Dasha1_proc.vcxproj -> C:\Users\Евгений\Documents\Методы программирования\Даша\2\New Sort\Dasha1_proc\Debug\Dasha1_proc.pdb (Full PDB)
+=======
+>>>>>>> origin/NewClass
 ﻿  func.cpp
 <<<<<<< HEAD
 c:\users\евгений\documents\методы программирования\даша\2\new field\dasha1_proc\dasha1_proc\func.cpp(50): warning C4715: In: значение возвращается не при всех путях выполнения

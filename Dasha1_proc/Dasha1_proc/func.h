@@ -26,6 +26,22 @@ struct  WisdomItem // структура, обобщающа¤ все имеющиес¤ составл¤ющие кладезь м
 	key k; // ключ
 
 	void* someType;
+	int CountSighns(char* Text)
+	{
+		char c;
+		int count = 0;
+		for (int i = 0; i < strlen(Text); i++)
+		{
+			c = Text[i];
+			if (c == ',' || c == '.' || c == '?' || c == '!')
+			{
+				count++;
+			}
+		}
+
+		return count;
+	}
+	int quantityOfSpecialSymbols = 0;
 };
 
 struct List
@@ -44,6 +60,7 @@ WisdomItem* In(ifstream &ifst);
 Aforysm* Inn(ifstream &ifst);
 Poslovica* Inc(ifstream &ifst);
 Riddle* Inr(ifstream &ifst);
+void Writeinfo(WisdomItem &wisd, ofstream &ofst, int des);
 
 void OutA(Aforysm &af, ostream &ofst);
 void OutP(Poslovica &ps, ostream &ofst);
@@ -52,4 +69,8 @@ void OutR(Riddle &ps, ostream &ofst);
 void Clear(List &l);
 void Add(List &l, WisdomItem &el);
 void In(List &l, ifstream &ifst);
+
 void Out(List &l, ofstream &ofst, int des);
+
+void Sort(List &l);
+bool Compare(WisdomItem item1, WisdomItem item2);
