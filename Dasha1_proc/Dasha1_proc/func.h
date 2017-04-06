@@ -16,6 +16,7 @@ struct Poslovica
 struct  WisdomItem
 {
 	char Text[256];
+	int Grade = 0;
 
 	key k;
 
