@@ -12,7 +12,7 @@ int main(int argc, char* argv[])
 {
 	if (argc != 3)
 	{
-		cout << "Error: Input and/or output filenames are missing" << endl;
+		cerr << "Error: Input and/or output filenames are missing" << endl;
 		return 0;
 	}
 	else
@@ -26,6 +26,6 @@ int main(int argc, char* argv[])
 		outputFile.open(argv[2], ios::out | ios::app);
 		Out(l, outputFile);
 	}
-	system("Pause");
+	system("pause");
 	return 0;
 }

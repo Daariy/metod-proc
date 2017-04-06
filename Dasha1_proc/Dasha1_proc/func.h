@@ -21,11 +21,32 @@ struct  WisdomItem // структура, обобщающа¤ все имеющиес¤ составл¤ющие кладезь м
 {
 	char Text[256];
 
+<<<<<<< HEAD
+	key k; // ключ
+		  
+=======
 	int Grade = 0;
 
 	key k; // ключ
 
+>>>>>>> refs/remotes/origin/NewClass
 	void* someType;
+	int CountSighns(char* Text)
+	{
+		char c;
+		int count = 0;
+		for (int i = 0; i < strlen(Text); i++)
+		{
+			c = Text[i];
+			if (c == ',' || c == '.' || c == '?' || c == '!')
+			{
+				count++;
+			}
+		}
+
+		return count;
+	}
+	int quantityOfSpecialSymbols = 0;
 };
 
 struct List
@@ -52,4 +73,10 @@ void OutR(Riddle &ps, ostream &ofst);
 void Clear(List &l);
 void Add(List &l, WisdomItem &el);
 void In(List &l, ifstream &ifst);
+<<<<<<< HEAD
 void Out(List &l, ofstream &ofst);
+void Sort(List &l);
+bool Compare(WisdomItem item1, WisdomItem item2);
+=======
+void Out(List &l, ofstream &ofst);
+>>>>>>> refs/remotes/origin/NewClass
