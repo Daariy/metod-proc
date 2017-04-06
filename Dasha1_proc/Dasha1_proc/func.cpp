@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "func.h"
 #include <iostream>
-#include <cstring>
 using namespace std;
 
 Aforysm* Inn(ifstream &ifst)
@@ -21,21 +20,19 @@ Poslovica* Inc(ifstream &ifst)
 
 WisdomItem* In(ifstream &ifst)
 {
-	WisdomItem *ws;
 	int num = 0;
+	WisdomItem *ws;
 	ifst >> num;
 	char t[256];
 	ifst.getline(t, 256);
-	
 	switch (num)
 	{
 	case 1:
-	{	
-		ws = new WisdomItem;
-		ifst.getline(ws->Text, 256);
-		ws->k = AFORYSM;
-		ws->someType = (void*)Inn(ifst);
-		return ws;
+	{		  ws = new WisdomItem;
+	ifst.getline(ws->Text, 256);
+	ws->k = AFORYSM;
+	ws->someType = (void*)Inn(ifst);
+	return ws;
 	}
 	case 2:
 	{
@@ -51,16 +48,16 @@ WisdomItem* In(ifstream &ifst)
 }
 void OutA(Aforysm &af, ostream &ofst)
 {
-	ofst << "Это Афоризм. Его автор: ";
+	ofst << "Following statement is an Aforysm. Its Author is: ";
 	ofst << af.Author << endl;
-	ofst << "Афоризм: ";
+	ofst << "Its content: ";
 }
 
 void OutP(Poslovica &ps, ostream &ofst)
 {
-	ofst << "Это Пословица. Страна: ";
+	ofst << "Folowing statement is Poslovica. Its Country is: ";
 	ofst << ps.Country << endl;
-	ofst << "Пословица: ";
+	ofst << "Its content: ";
 }
 
 void Clear(List &l)
@@ -101,7 +98,7 @@ void In(List &l, ifstream &ifst)
 {
 	if (ifst.fail())
 	{
-		cout << "Ошибка: не удается открыть входной файл!" << endl;
+		cerr << "Error: Unable to open input file" << endl;
 		return;
 	}
 	else
@@ -114,65 +111,91 @@ void In(List &l, ifstream &ifst)
 	}
 	ifst.close();
 }
-void Writeinfo(WisdomItem &wisd, ofstream &ofst)
+void Writeinfo(WisdomItem &wisd, ofstream &ofst, int des)
 {
-	if (wisd.k == AFORYSM)
+	if (des == 1)
 	{
 
-		OutA(*((Aforysm*)wisd.someType), ofst);
-		ofst << wisd.Text << endl;
-		OutA(*((Aforysm*)wisd.someType), cout);
-		cout << wisd.Text << endl;
+		if (wisd.k == AFORYSM)
+		{
 
+			OutA(*((Aforysm*)wisd.someType), ofst);
+			ofst << wisd.Text << endl;
+			OutA(*((Aforysm*)wisd.someType), cout);
+			cout << wisd.Text << endl;
+
+		}
 	}
-	if (wisd.k == POSLOVICA)
+	if (des == 2)
+	{
+		if (wisd.k == POSLOVICA)
+		{
+
+			OutP(*((Poslovica*)wisd.someType), ofst);
+			ofst << wisd.Text << endl;
+			OutP(*((Poslovica*)wisd.someType), cout);
+			cout << wisd.Text << endl;
+		}
+	}
+	if (des == 0)
 	{
 
-		OutP(*((Poslovica*)wisd.someType), ofst);
-		ofst << wisd.Text << endl;
-		OutP(*((Poslovica*)wisd.someType), cout);
-		cout << wisd.Text << endl;
+		if (wisd.k == AFORYSM)
+		{
 
+			OutA(*((Aforysm*)wisd.someType), ofst);
+			ofst << wisd.Text << endl;
+			OutA(*((Aforysm*)wisd.someType), cout);
+			cout << wisd.Text << endl;
+
+		}
+
+
+		if (wisd.k == POSLOVICA)
+		{
+
+			OutP(*((Poslovica*)wisd.someType), ofst);
+			ofst << wisd.Text << endl;
+			OutP(*((Poslovica*)wisd.someType), cout);
+			cout << wisd.Text << endl;
+		}
 	}
 }
-
-void Out(List &l, ofstream &ofst)
+void Out(List &l, ofstream &ofst, int des)
 {
 	if (ofst.fail())
 	{
-		cout << "Ошибка: не удается открыть выходной файл!" << endl;
+		cerr << "Error: Unable to open output file" << endl;
 		return;
 	}
 	else
 	{
 		if (l.size)
 		{
-			ofst << "Контейнер заполнен:\n";
-			cout << "Контейнер заполнен:\n";
+			ofst << "Container is filled:\n";
+			cout << "Container is filled:\n";
 		}
 		else
 		{
-			ofst << "Контейнер пуст:\n";
-			cout << "Контейнер пуст:\n";
+			ofst << "Container is empty:\n";
+			cout << "Container is empty:\n";
 		}
 
 		WisdomItem* current = new WisdomItem;
 		for (int i = 0; i < l.size; i++)
 		{
-
 			l.Current = l.Current->Next;
-
 			current = (WisdomItem*)l.Current->item;
-			Writeinfo(*current, ofst);
-
-			current = nullptr;
-			delete current;
+			Writeinfo(*current, ofst, des);
 		}
-		string result = "----------------------------- \nИмеется " + to_string(l.size) + " объектов(а).\n";
+
+		current = nullptr;
+		delete current;
+
+		string result = "----------------------------- \nThere are " + to_string(l.size) + " objects involving.\n";
 		cout << result;
 		ofst << result;
 		ofst.close();
 	}
+
 }
-
-

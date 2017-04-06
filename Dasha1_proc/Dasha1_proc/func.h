@@ -18,7 +18,6 @@ struct  WisdomItem
 	char Text[256];
 
 	key k;
-
 	void* someType;
 };
 
@@ -36,12 +35,13 @@ struct List
 
 WisdomItem* In(ifstream &ifst);
 Aforysm* Inn(ifstream &ifst);
-Poslovica* Inc(ifstream &ifst);
+void Inc(Poslovica &ps, ifstream &ifst);
 
 void OutA(Aforysm &af, ostream &ofst);
 void OutP(Poslovica &ps, ostream &ofst);
 
+
 void Clear(List &l);
 void Add(List &l, WisdomItem &el);
 void In(List &l, ifstream &ifst);
-void Out(List &l, ofstream &ofst);
+void Out(List &l, ofstream &ofst, int des);
