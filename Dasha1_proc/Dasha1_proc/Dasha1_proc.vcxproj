@@ -19,7 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{FB511B01-7A08-4484-B4E2-C8F5F4BF2044}</ProjectGuid>
+    <ProjectGuid>{0B6F011B-4D0B-405C-88D7-1E1215AA8A78}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Dasha1_proc</RootNamespace>
     <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>

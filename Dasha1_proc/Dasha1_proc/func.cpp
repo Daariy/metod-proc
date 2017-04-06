@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "func.h"
 #include <iostream>
+#include <cstring>
+
 using namespace std;
 
 Aforysm* Inn(ifstream &ifst)
@@ -15,6 +17,13 @@ Poslovica* Inc(ifstream &ifst)
 	Poslovica* ps = new Poslovica;
 	ifst.getline(ps->Country, 256);
 	return ps;
+}
+
+Riddle* Inr(ifstream &ifst)
+{
+	Riddle* r = new Riddle;
+	ifst.getline(r->Answer, 256);
+	return r;
 }
 
 WisdomItem* In(ifstream &ifst)
@@ -44,10 +53,20 @@ WisdomItem* In(ifstream &ifst)
 		ifst >> ws->Grade;
 		return ws;
 	}
+	case 3:
+	{
+		ws = new WisdomItem;
+		ifst.getline(ws->Text, 256);
+		ws->k = RIDDLE;
+		ws->someType = (void*)Inr(ifst);
+		ifst >> ws->Grade;
+		return ws;
+	}
 	default:
 		break;
 	}
 }
+
 void OutA(Aforysm &af, ostream &ofst)
 {
 	ofst << "Following statement is an Aforysm. Its Author is: ";
@@ -60,6 +79,13 @@ void OutP(Poslovica &ps, ostream &ofst)
 	ofst << "Folowing statement is Poslovica. Its Country is: ";
 	ofst << ps.Country << endl;
 	ofst << "Its content: ";
+}
+
+void OutR(Riddle &r, ostream &ofst)
+{
+	ofst << "Folowing statement is Riddle. Its Answer is: ";
+	ofst << r.Answer << endl;
+	ofst << "Its question: ";
 }
 
 void Clear(List &l)
@@ -100,7 +126,7 @@ void In(List &l, ifstream &ifst)
 {
 	if (ifst.fail())
 	{
-		cerr << "Error: Unable to open input file" << endl;
+		cout << "Error: Unable to open input file" << endl;
 		return;
 	}
 	else
@@ -113,6 +139,7 @@ void In(List &l, ifstream &ifst)
 	}
 	ifst.close();
 }
+
 void Writeinfo(WisdomItem &wisd, ofstream &ofst)
 {
 	if (wisd.k == AFORYSM)
@@ -136,6 +163,7 @@ void Writeinfo(WisdomItem &wisd, ofstream &ofst)
 		cout << "The grade of the following statement is: " << wisd.Grade << endl;
 	}
 }
+
 void Out(List &l, ofstream &ofst)
 {
 	if (ofst.fail())
@@ -164,7 +192,31 @@ void Out(List &l, ofstream &ofst)
 
 			current = (WisdomItem*)l.Current->item;
 			Writeinfo(*current, ofst);
+			if (current->k == AFORYSM)
+			{
 
+				OutA(*((Aforysm*)current->someType), ofst);
+				ofst << current->Text << endl;
+				OutA(*((Aforysm*)current->someType), cout);
+				cout << current->Text << endl;
+
+			}
+			if (current->k == POSLOVICA)
+			{
+
+				OutP(*((Poslovica*)current->someType), ofst);
+				ofst << current->Text << endl;
+				OutP(*((Poslovica*)current->someType), cout);
+				cout << current->Text << endl;
+			}
+			if (current->k == RIDDLE)
+			{
+
+				OutR(*((Riddle*)current->someType), ofst);
+				ofst << current->Text << endl;
+				OutR(*((Riddle*)current->someType), cout);
+				cout << current->Text << endl;
+			}
 		}
 
 		current = nullptr;
