@@ -2,6 +2,7 @@
 #include "func.h"
 #include <iostream>
 #include <cstring>
+
 using namespace std;
 
 Aforysm* Inn(ifstream &ifst)
@@ -19,18 +20,24 @@ Poslovica* Inc(ifstream &ifst)
 	return ps;
 }
 
+Riddle* Inr(ifstream &ifst)
+{
+	Riddle* r = new Riddle;
+	ifst.getline(r->Answer, 256);
+	return r;
+}
+
 WisdomItem* In(ifstream &ifst)
 {
-	WisdomItem *ws;
 	int num = 0;
+	WisdomItem *ws;
 	ifst >> num;
 	char t[256];
 	ifst.getline(t, 256);
-	
 	switch (num)
 	{
 	case 1:
-	{	
+	{
 		ws = new WisdomItem;
 		ifst.getline(ws->Text, 256);
 		ws->k = AFORYSM;
@@ -45,22 +52,38 @@ WisdomItem* In(ifstream &ifst)
 		ws->someType = (void*)Inc(ifst);
 		return ws;
 	}
+	case 3:
+	{
+		ws = new WisdomItem;
+		ifst.getline(ws->Text, 256);
+		ws->k = RIDDLE;
+		ws->someType = (void*)Inr(ifst);
+		return ws;
+	}
 	default:
 		break;
 	}
 }
+
 void OutA(Aforysm &af, ostream &ofst)
 {
-	ofst << "Это Афоризм. Его автор: ";
+	ofst << "Following statement is an Aforysm. Its Author is: ";
 	ofst << af.Author << endl;
-	ofst << "Афоризм: ";
+	ofst << "Its content: ";
 }
 
 void OutP(Poslovica &ps, ostream &ofst)
 {
-	ofst << "Это Пословица. Страна: ";
+	ofst << "Folowing statement is Poslovica. Its Country is: ";
 	ofst << ps.Country << endl;
-	ofst << "Пословица: ";
+	ofst << "Its content: ";
+}
+
+void OutR(Riddle &r, ostream &ofst)
+{
+	ofst << "Folowing statement is Riddle. Its Answer is: ";
+	ofst << r.Answer << endl;
+	ofst << "Its question: ";
 }
 
 void Clear(List &l)
@@ -101,7 +124,7 @@ void In(List &l, ifstream &ifst)
 {
 	if (ifst.fail())
 	{
-		cout << "Ошибка: не удается открыть входной файл!" << endl;
+		cout << "Error: Unable to open input file" << endl;
 		return;
 	}
 	else
@@ -114,46 +137,25 @@ void In(List &l, ifstream &ifst)
 	}
 	ifst.close();
 }
-void Writeinfo(WisdomItem &wisd, ofstream &ofst)
-{
-	if (wisd.k == AFORYSM)
-	{
-
-		OutA(*((Aforysm*)wisd.someType), ofst);
-		ofst << wisd.Text << endl;
-		OutA(*((Aforysm*)wisd.someType), cout);
-		cout << wisd.Text << endl;
-
-	}
-	if (wisd.k == POSLOVICA)
-	{
-
-		OutP(*((Poslovica*)wisd.someType), ofst);
-		ofst << wisd.Text << endl;
-		OutP(*((Poslovica*)wisd.someType), cout);
-		cout << wisd.Text << endl;
-
-	}
-}
 
 void Out(List &l, ofstream &ofst)
 {
 	if (ofst.fail())
 	{
-		cout << "Ошибка: не удается открыть выходной файл!" << endl;
+		cout << "Error: Unable to open output file" << endl;
 		return;
 	}
 	else
 	{
 		if (l.size)
 		{
-			ofst << "Контейнер заполнен:\n";
-			cout << "Контейнер заполнен:\n";
+			ofst << "Container is filled:\n";
+			cout << "Container is filled:\n";
 		}
 		else
 		{
-			ofst << "Контейнер пуст:\n";
-			cout << "Контейнер пуст:\n";
+			ofst << "Container is empty:\n";
+			cout << "Container is empty:\n";
 		}
 
 		WisdomItem* current = new WisdomItem;
@@ -163,16 +165,42 @@ void Out(List &l, ofstream &ofst)
 			l.Current = l.Current->Next;
 
 			current = (WisdomItem*)l.Current->item;
-			Writeinfo(*current, ofst);
+			if (current->k == AFORYSM)
+			{
 
-			current = nullptr;
-			delete current;
+				OutA(*((Aforysm*)current->someType), ofst);
+				ofst << current->Text << endl;
+				OutA(*((Aforysm*)current->someType), cout);
+				cout << current->Text << endl;
+
+			}
+			if (current->k == POSLOVICA)
+			{
+
+				OutP(*((Poslovica*)current->someType), ofst);
+				ofst << current->Text << endl;
+				OutP(*((Poslovica*)current->someType), cout);
+				cout << current->Text << endl;
+			}
+			if (current->k == RIDDLE)
+			{
+
+				OutR(*((Riddle*)current->someType), ofst);
+				ofst << current->Text << endl;
+				OutR(*((Riddle*)current->someType), cout);
+				cout << current->Text << endl;
+			}
 		}
-		string result = "----------------------------- \nИмеется " + to_string(l.size) + " объектов(а).\n";
+
+		current = nullptr;
+		delete current;
+
+		string result = "----------------------------- \nThere are " + to_string(l.size) + " objects involving.\n";
 		cout << result;
 		ofst << result;
 		ofst.close();
 	}
+
 }
 
 

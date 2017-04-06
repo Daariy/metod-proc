@@ -1,7 +1,8 @@
-﻿  stdafx.cpp
-  func.cpp
+﻿  func.cpp
+  Создание кода...
+c:\users\евгений\documents\методы программирования\даша\2\new class\dasha1_proc\dasha1_proc\func.cpp(66): warning C4715: In: значение возвращается не при всех путях выполнения
+  Компиляция...
   Dasha1_proc.cpp
   Создание кода...
-c:\users\евгений\documents\методы программирования\даша\1\dasha1_proc\dasha1_proc\func.cpp(51): warning C4715: In: значение возвращается не при всех путях выполнения
-  Dasha1_proc.vcxproj -> C:\Users\Евгений\Documents\Методы программирования\Даша\1\Dasha1_proc\Debug\Dasha1_proc.exe
-  Dasha1_proc.vcxproj -> C:\Users\Евгений\Documents\Методы программирования\Даша\1\Dasha1_proc\Debug\Dasha1_proc.pdb (Full PDB)
+  Dasha1_proc.vcxproj -> C:\Users\Евгений\Documents\Методы программирования\Даша\2\New Class\Dasha1_proc\Debug\Dasha1_proc.exe
+  Dasha1_proc.vcxproj -> C:\Users\Евгений\Documents\Методы программирования\Даша\2\New Class\Dasha1_proc\Debug\Dasha1_proc.pdb (Full PDB)
