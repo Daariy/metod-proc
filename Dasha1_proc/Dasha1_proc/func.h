@@ -72,5 +72,5 @@ void In(List &l, ifstream &ifst);
 
 void Out(List &l, ofstream &ofst, int des);
 
-void Sort(List &l);
+void Sort(List &l,int des);
 bool Compare(WisdomItem item1, WisdomItem item2);
