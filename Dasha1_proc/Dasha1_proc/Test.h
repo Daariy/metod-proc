@@ -138,28 +138,28 @@ class WisdomItemTest : public ::testing::Test {
 TEST_F(WisdomItemTest, CheckCountSighns)
 {
 	WisdomItem a;
-	strcpy_s(a.Text,"...");
+	strcpy_s(a.text,"...");
 	int expected = 3;
-	ASSERT_EQ(expected, a.CountSighns(a.Text));
+	ASSERT_EQ(expected, a.CountSighns(a.text));
 }
 
 TEST_F(WisdomItemTest, CheckCountSighnsZero)
 {
 	WisdomItem a;
-	strcpy_s(a.Text, "");
+	strcpy_s(a.text, "");
 	int expected = 0;
-	ASSERT_EQ(expected, a.CountSighns(a.Text));
+	ASSERT_EQ(expected, a.CountSighns(a.text));
 }
 
 TEST_F(WisdomItemTest, CheckCompare)
 {
 	WisdomItem s1;
-	strcpy_s(s1.Text, "..");
-	s1.quantityOfSpecialSymbols = s1.CountSighns(s1.Text);
+	strcpy_s(s1.text, "..");
+	s1.quantityOfSpecialSymbols = s1.CountSighns(s1.text);
 
 	WisdomItem s2;
-	strcpy_s(s2.Text, "...");
-	s2.quantityOfSpecialSymbols = s2.CountSighns(s2.Text);
+	strcpy_s(s2.text, "...");
+	s2.quantityOfSpecialSymbols = s2.CountSighns(s2.text);
 
 	ASSERT_TRUE(Compare(s1, s2));
 }
@@ -172,12 +172,12 @@ TEST_F(WisdomItemTest, CheckInputAforysm)
 	WisdomItem* expected;
 	expected = new WisdomItem;
 	expected->k = AFORYSM;
-	strcpy_s(expected->Text,"qwerty..");
-	expected->Grade = 7;
+	strcpy_s(expected->text,"qwerty..");
+	expected->grade = 7;
 
 	ASSERT_TRUE(expected->k == actual->k);
-	ASSERT_STREQ(expected->Text, actual->Text);
-	ASSERT_EQ(expected->Grade, actual->Grade);
+	ASSERT_STREQ(expected->text, actual->text);
+	ASSERT_EQ(expected->grade, actual->grade);
 }
 
 TEST_F(WisdomItemTest, CheckInputPoslovica)
@@ -188,12 +188,12 @@ TEST_F(WisdomItemTest, CheckInputPoslovica)
 	WisdomItem* expected;
 	expected = new WisdomItem;
 	expected->k = POSLOVICA;
-	strcpy_s(expected->Text, "qwerty..");
-	expected->Grade = 7;
+	strcpy_s(expected->text, "qwerty..");
+	expected->grade = 7;
 
 	ASSERT_TRUE(expected->k == actual->k);
-	ASSERT_STREQ(expected->Text, actual->Text);
-	ASSERT_EQ(expected->Grade, actual->Grade);
+	ASSERT_STREQ(expected->text, actual->text);
+	ASSERT_EQ(expected->grade, actual->grade);
 }
 
 TEST_F(WisdomItemTest, CheckInputRiddle)
@@ -204,12 +204,12 @@ TEST_F(WisdomItemTest, CheckInputRiddle)
 	WisdomItem* expected;
 	expected = new WisdomItem;
 	expected->k = RIDDLE;
-	strcpy_s(expected->Text, "qwerty..");
-	expected->Grade = 7;
+	strcpy_s(expected->text, "qwerty..");
+	expected->grade = 7;
 
 	ASSERT_TRUE(expected->k == actual->k);
-	ASSERT_STREQ(expected->Text, actual->Text);
-	ASSERT_EQ(expected->Grade, actual->Grade);
+	ASSERT_STREQ(expected->text, actual->text);
+	ASSERT_EQ(expected->grade, actual->grade);
 }
 
 TEST_F(WisdomItemTest, CheckOutputAforysm)
@@ -223,8 +223,8 @@ TEST_F(WisdomItemTest, CheckOutputAforysm)
 	a = new Aforysm;
 	strcpy_s(a->Author, "Dasha");
 	s->someType = (void*)a;
-	s->Grade = 7;
-	strcpy_s(s->Text, "qwerty..");
+	s->grade = 7;
+	strcpy_s(s->text, "qwerty..");
 
 	Writeinfo(*s, ofst,0);
 	ofst.close();
@@ -246,8 +246,8 @@ TEST_F(WisdomItemTest, CheckOutputPoslovica)
 	a = new Poslovica;
 	strcpy_s(a->Country, "Russia");
 	s->someType = (void*)a;
-	s->Grade = 7;
-	strcpy_s(s->Text, "qwerty..");
+	s->grade = 7;
+	strcpy_s(s->text, "qwerty..");
 
 	Writeinfo(*s, ofst, 0);
 	ofst.close();
@@ -269,8 +269,8 @@ TEST_F(WisdomItemTest, CheckOutputRiddle)
 	a = new Riddle;
 	strcpy_s(a->Answer, "Dasha");
 	s->someType = (void*)a;
-	s->Grade = 7;
-	strcpy_s(s->Text, "qwerty..");
+	s->grade = 7;
+	strcpy_s(s->text, "qwerty..");
 
 	Writeinfo(*s, ofst, 0);
 	ofst.close();

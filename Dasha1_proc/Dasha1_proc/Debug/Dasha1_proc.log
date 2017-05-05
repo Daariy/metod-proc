@@ -1,8 +1,4 @@
-﻿  stdafx.cpp
-  func.cpp
-c:\users\евгений\documents\методы программирования\даша\5\dasha1_proc\dasha1_proc\func.h(32): warning C4018: <: несоответствие типов со знаком и без знака
-  Dasha1_proc.cpp
-c:\users\евгений\documents\методы программирования\даша\5\dasha1_proc\dasha1_proc\func.h(32): warning C4018: <: несоответствие типов со знаком и без знака
-  Создание кода...
-  Dasha1_proc.vcxproj -> C:\Users\Евгений\Documents\Методы программирования\Даша\5\Dasha1_proc\Debug\Dasha1_proc.exe
-  Dasha1_proc.vcxproj -> C:\Users\Евгений\Documents\Методы программирования\Даша\5\Dasha1_proc\Debug\Dasha1_proc.pdb (Full PDB)
+﻿  func.cpp
+c:\users\евгений\documents\методы программирования\даша\6\dasha1_proc\dasha1_proc\func.h(32): warning C4018: <: несоответствие типов со знаком и без знака
+  Dasha1_proc.vcxproj -> C:\Users\Евгений\Documents\Методы программирования\Даша\6\Dasha1_proc\Debug\Dasha1_proc.exe
+  Dasha1_proc.vcxproj -> C:\Users\Евгений\Documents\Методы программирования\Даша\6\Dasha1_proc\Debug\Dasha1_proc.pdb (Full PDB)

@@ -39,7 +39,8 @@ WisdomItem* In(ifstream &ifst)
 	WisdomItem *ws;
 	ifst >> num;
 	CheckWrongInput(ifst);
-	if (!(1 <= num && num <= 3)) {
+	if (!(1 <= num && num <= 3)) 
+	{
 		cerr << "Error: unknown type" << endl;
 		exit(1);
 	}
@@ -48,41 +49,41 @@ WisdomItem* In(ifstream &ifst)
 	CheckWrongInput(ifst);
 	switch (num)
 	{
-	case 1:
-	{		  
-		ws = new WisdomItem;
-		ifst.getline(ws->Text, 256);
-		CheckWrongInput(ifst);
-		ws->k = AFORYSM;
-		ws->someType = (void*)Inn(ifst);
-		break;
-	}
-	case 2:
-	{
-		ws = new WisdomItem;
-		ifst.getline(ws->Text, 256);
-		CheckWrongInput(ifst);
-		ws->k = POSLOVICA;
-		ws->someType = (void*)Inc(ifst);
-		break;
-	}
-	case 3:
-	{
-		ws = new WisdomItem;
-		ifst.getline(ws->Text, 256);
-		CheckWrongInput(ifst);
-		ws->k = RIDDLE;
-		ws->someType = (void*)Inr(ifst);
-		break;
-	}
-	default:
-		break;
+		case 1:
+		{		  
+			ws = new WisdomItem;
+			ifst.getline(ws->text, 256);
+			CheckWrongInput(ifst);
+			ws->k = AFORYSM;
+			ws->someType = (void*)Inn(ifst);
+			break;
+		}
+		case 2:
+		{
+			ws = new WisdomItem;
+			ifst.getline(ws->text, 256);
+			CheckWrongInput(ifst);
+			ws->k = POSLOVICA;
+			ws->someType = (void*)Inc(ifst);
+			break;
+		}
+		case 3:
+		{
+			ws = new WisdomItem;
+			ifst.getline(ws->text, 256);
+			CheckWrongInput(ifst);
+			ws->k = RIDDLE;
+			ws->someType = (void*)Inr(ifst);
+			break;
+		}
+		default:
+			break;
 	}
 
-	ws->quantityOfSpecialSymbols = ws->CountSighns(ws->Text);
-	ifst >> ws->Grade;
+	ws->quantityOfSpecialSymbols = ws->CountSighns(ws->text);
+	ifst >> ws->grade;
 	CheckWrongInput(ifst);
-	CheckGrade(ws->Grade);
+	Checkgrade(ws->grade);
 	return ws;
 }
 
@@ -114,15 +115,15 @@ void Clear(List &l)
 {
 	while (l.size != 0)
 	{
-		List::node *temp = l.Head->Next;
-		delete l.Head;
-		l.Head = temp;
+		List::node *temp = l.head->next;
+		delete l.head;
+		l.head = temp;
 		--l.size;
 	}
 
-	l.Head = nullptr;
-	l.Tail = nullptr;
-	l.Current = nullptr;
+	l.head = nullptr;
+	l.tail = nullptr;
+	l.current = nullptr;
 }
 
 void Add(List &l, WisdomItem &el)
@@ -130,17 +131,17 @@ void Add(List &l, WisdomItem &el)
 	++l.size;
 	List::node* temp = new List::node;
 	temp->item = &el;
-	temp->Next = l.Head;
-	l.Current = temp;
+	temp->next = l.head;
+	l.current = temp;
 
-	if (l.Head != nullptr)
+	if (l.head != nullptr)
 	{
-		l.Tail->Next = temp;
-		l.Tail = temp;
+		l.tail->next = temp;
+		l.tail = temp;
 	}
 	else
 	{
-		l.Head = l.Tail = temp;
+		l.head = l.tail = temp;
 	}
 }
 
@@ -165,13 +166,13 @@ void Writeinfo(WisdomItem &wisd, ofstream &ofst, int des)
 		if (wisd.k == AFORYSM)
 		{
 			OutA(*((Aforysm*)wisd.someType), ofst);
-			ofst << wisd.Text << endl;
+			ofst << wisd.text << endl;
 			OutA(*((Aforysm*)wisd.someType), cout);
-			cout << wisd.Text << endl;
-			ofst << "The grade of the following statement is: " << wisd.Grade << endl;
-			cout << "The grade of the following statement is: " << wisd.Grade << endl;
-			ofst << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
-			cout << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
+			cout << wisd.text << endl;
+			ofst << "The grade of the following statement is: " << wisd.grade << endl;
+			cout << "The grade of the following statement is: " << wisd.grade << endl;
+			ofst << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.text) << endl;
+			cout << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.text) << endl;
 		}
 	}
 	if (des == 2)
@@ -179,14 +180,14 @@ void Writeinfo(WisdomItem &wisd, ofstream &ofst, int des)
 		if (wisd.k == POSLOVICA)
 		{
 			OutP(*((Poslovica*)wisd.someType), ofst);
-			ofst << wisd.Text << endl;
+			ofst << wisd.text << endl;
 			
 			OutP(*((Poslovica*)wisd.someType), cout);
-			cout << wisd.Text << endl;
-			ofst << "The grade of the following statement is: " << wisd.Grade << endl;
-			cout << "The grade of the following statement is: " << wisd.Grade << endl;
-			ofst << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
-			cout << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
+			cout << wisd.text << endl;
+			ofst << "The grade of the following statement is: " << wisd.grade << endl;
+			cout << "The grade of the following statement is: " << wisd.grade << endl;
+			ofst << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.text) << endl;
+			cout << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.text) << endl;
 		}
 
 	}
@@ -195,13 +196,13 @@ void Writeinfo(WisdomItem &wisd, ofstream &ofst, int des)
 		if (wisd.k == RIDDLE)
 		{
 			OutR(*((Riddle*)wisd.someType), ofst);
-			ofst << wisd.Text << endl;
+			ofst << wisd.text << endl;
 			OutR(*((Riddle*)wisd.someType), cout);
-			cout << wisd.Text << endl;
-			ofst << "The grade of the following statement is: " << wisd.Grade << endl;
-			cout << "The grade of the following statement is: " << wisd.Grade << endl;
-			ofst << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
-			cout << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
+			cout << wisd.text << endl;
+			ofst << "The grade of the following statement is: " << wisd.grade << endl;
+			cout << "The grade of the following statement is: " << wisd.grade << endl;
+			ofst << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.text) << endl;
+			cout << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.text) << endl;
 		}
 		
 	}
@@ -210,31 +211,31 @@ void Writeinfo(WisdomItem &wisd, ofstream &ofst, int des)
 		if (wisd.k == AFORYSM)
 		{
 			OutA(*((Aforysm*)wisd.someType), ofst);
-			ofst << wisd.Text << endl;
+			ofst << wisd.text << endl;
 			OutA(*((Aforysm*)wisd.someType), cout);
-			cout << wisd.Text << endl;
+			cout << wisd.text << endl;
 
 		}
 		if (wisd.k == POSLOVICA)
 		{
 			OutP(*((Poslovica*)wisd.someType), ofst);
-			ofst << wisd.Text << endl;
+			ofst << wisd.text << endl;
 			OutP(*((Poslovica*)wisd.someType), cout);
-			cout << wisd.Text << endl;
+			cout << wisd.text << endl;
 
 		}
 		if (wisd.k == RIDDLE)
 		{
 			OutR(*((Riddle*)wisd.someType), ofst);
-			ofst << wisd.Text << endl;
+			ofst << wisd.text << endl;
 			OutR(*((Riddle*)wisd.someType), cout);
-			cout << wisd.Text << endl;
+			cout << wisd.text << endl;
 
 		}
-		ofst << "The grade of the following statement is: " << wisd.Grade << endl;
-		cout << "The grade of the following statement is: " << wisd.Grade << endl;
-		ofst << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
-		cout << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
+		ofst << "The grade of the following statement is: " << wisd.grade << endl;
+		cout << "The grade of the following statement is: " << wisd.grade << endl;
+		ofst << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.text) << endl;
+		cout << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.text) << endl;
 	}
 	
 }
@@ -253,15 +254,15 @@ void Out(List &l, ofstream &ofst, int des)
 		cout << "Container is empty:\n";
 	}
 
-	WisdomItem* current = new WisdomItem;
+	WisdomItem* tmp = new WisdomItem;
 	for (int i = 0; i < l.size; i++)
 	{
-		l.Current = l.Current->Next;
-		current = (WisdomItem*)l.Current->item;
+		l.current = l.current->next;
+		tmp = (WisdomItem*)l.current->item;
 
-		Writeinfo(*current, ofst, des);
-		current = nullptr;
-		delete current;
+		Writeinfo(*tmp, ofst, des);
+		tmp = nullptr;
+		delete tmp;
 
 	}
 	string result = "----------------------------- \nThere are " + to_string(l.size) + " objects involving.\n";
@@ -275,18 +276,18 @@ void Sort(List &l, int des)
 {
 	List::node *s, *ptr;
 	WisdomItem *temp;
-	if (l.Tail == nullptr)
+	if (l.tail == nullptr)
 	{
 		return;
 	}
-	s = l.Tail->Next;
+	s = l.tail->next;
 
-	while (s != l.Tail)
+	while (s != l.tail)
 	{
-		ptr = s->Next;
-		while (ptr != l.Tail->Next)
+		ptr = s->next;
+		while (ptr != l.tail->next)
 		{
-			if (ptr != l.Tail->Next)
+			if (ptr != l.tail->next)
 			{
 				switch (des)
 				{
@@ -318,9 +319,9 @@ void Sort(List &l, int des)
 			{
 				break;
 			}
-			ptr = ptr->Next;
+			ptr = ptr->next;
 		}
-		s = s->Next;
+		s = s->next;
 	}
 }
 

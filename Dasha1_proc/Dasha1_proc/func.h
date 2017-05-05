@@ -18,20 +18,20 @@ struct Riddle
 };
 struct  WisdomItem // структура, обобщающа¤ все имеющиес¤ составл¤ющие кладезь мудрости элементы
 {
-	char Text[256];
+	char text[256];
 
-	int Grade = 0;
+	int grade = 0;
 
 	key k; // ключ
 
 	void* someType;
-	int CountSighns(char* Text)
+	int CountSighns(char* text)
 	{
 		char c;
 		int count = 0;
-		for (int i = 0; i < strlen(Text); i++)
+		for (int i = 0; i < strlen(text); i++)
 		{
-			c = Text[i];
+			c = text[i];
 			if (c == ',' || c == '.' || c == '?' || c == '!')
 			{
 				count++;
@@ -48,10 +48,10 @@ struct List
 	struct node
 	{
 		WisdomItem* item = nullptr;
-		node* Next = nullptr;
+		node* next = nullptr;
 	};
 
-	node *Head = nullptr, *Tail = nullptr, *Current = nullptr; //ѕервый элемент,текущий и тот что последний
+	node *head = nullptr, *tail = nullptr, *current = nullptr; //ѕервый элемент,текущий и тот что последний
 	int size = 0; //„исло элементов в списке	
 };
 
