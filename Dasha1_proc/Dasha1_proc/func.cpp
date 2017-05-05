@@ -1,45 +1,58 @@
 #include "stdafx.h"
 #include "func.h"
-#include <iostream>
 #include <cstring>
+#include "Protect.h"
 
 using namespace std;
 
 Aforysm* Inn(ifstream &ifst)
 {
+	CheckInputFile(ifst);
 	Aforysm* af = new Aforysm;
 	ifst.getline(af->Author, 256);
+	CheckWrongInput(ifst);
 	return af;
 }
 
 Poslovica* Inc(ifstream &ifst)
 {
+	CheckInputFile(ifst);
 	Poslovica* ps = new Poslovica;
 	ifst.getline(ps->Country, 256);
+	CheckWrongInput(ifst);
 	return ps;
 }
 
 Riddle* Inr(ifstream &ifst)
 {
+	CheckInputFile(ifst);
 	Riddle* r = new Riddle;
 	ifst.getline(r->Answer, 256);
+	CheckWrongInput(ifst);
 	return r;
 }
 
 WisdomItem* In(ifstream &ifst)
 {
+	CheckInputFile(ifst);
 	int num = 0;
 	WisdomItem *ws;
 	ifst >> num;
+	CheckWrongInput(ifst);
+	if (!(1 <= num && num <= 3)) {
+		cerr << "Error: unknown type" << endl;
+		exit(1);
+	}
 	char t[256];
 	ifst.getline(t, 256);
+	CheckWrongInput(ifst);
 	switch (num)
 	{
 	case 1:
 	{		  
 		ws = new WisdomItem;
 		ifst.getline(ws->Text, 256);
-
+		CheckWrongInput(ifst);
 		ws->k = AFORYSM;
 		ws->someType = (void*)Inn(ifst);
 		break;
@@ -48,7 +61,7 @@ WisdomItem* In(ifstream &ifst)
 	{
 		ws = new WisdomItem;
 		ifst.getline(ws->Text, 256);
-
+		CheckWrongInput(ifst);
 		ws->k = POSLOVICA;
 		ws->someType = (void*)Inc(ifst);
 		break;
@@ -57,7 +70,7 @@ WisdomItem* In(ifstream &ifst)
 	{
 		ws = new WisdomItem;
 		ifst.getline(ws->Text, 256);
-
+		CheckWrongInput(ifst);
 		ws->k = RIDDLE;
 		ws->someType = (void*)Inr(ifst);
 		break;
@@ -68,11 +81,14 @@ WisdomItem* In(ifstream &ifst)
 
 	ws->quantityOfSpecialSymbols = ws->CountSighns(ws->Text);
 	ifst >> ws->Grade;
+	CheckWrongInput(ifst);
+	CheckGrade(ws->Grade);
 	return ws;
 }
 
 void OutA(Aforysm &af, ostream &ofst)
 {
+	CheckOutputFile(ofst);
 	ofst << "Following statement is an Aforysm. Its Author is: ";
 	ofst << af.Author << endl;
 	ofst << "Its content: ";
@@ -80,6 +96,7 @@ void OutA(Aforysm &af, ostream &ofst)
 
 void OutP(Poslovica &ps, ostream &ofst)
 {
+	CheckOutputFile(ofst);
 	ofst << "Folowing statement is Poslovica. Its Country is: ";
 	ofst << ps.Country << endl;
 	ofst << "Its content: ";
@@ -87,6 +104,7 @@ void OutP(Poslovica &ps, ostream &ofst)
 
 void OutR(Riddle &r, ostream &ofst)
 {
+	CheckOutputFile(ofst);
 	ofst << "Folowing statement is Riddle. Its Answer is: ";
 	ofst << r.Answer << endl;
 	ofst << "Its question: ";
@@ -128,24 +146,20 @@ void Add(List &l, WisdomItem &el)
 
 void In(List &l, ifstream &ifst)
 {
-	if (ifst.fail())
+	CheckInputFile(ifst);
+	
+	int tmp = 0;
+
+	while (!ifst.eof())
 	{
-		cerr << "Error: Unable to open input file" << endl;
-		return;
-	}
-	else
-	{
-		int tmp = 0;
-		while (!ifst.eof())
-		{
-			Add(l, *(In(ifst)));
-		}
+		Add(l, *(In(ifst)));
 	}
 	ifst.close();
 }
 
 void Writeinfo(WisdomItem &wisd, ofstream &ofst, int des)
 {
+	CheckOutputFile(ofst);
 	if (des == 1)
 	{	
 		if (wisd.k == AFORYSM)
@@ -227,42 +241,34 @@ void Writeinfo(WisdomItem &wisd, ofstream &ofst, int des)
 
 void Out(List &l, ofstream &ofst, int des)
 {
-	if (ofst.fail())
+	CheckOutputFile(ofst);
+	if (l.size)
 	{
-		cerr << "Error: Unable to open output file" << endl;
-		return;
+		ofst << "Container is filled:\n";
+		cout << "Container is filled:\n";
 	}
 	else
 	{
-		if (l.size)
-		{
-			ofst << "Container is filled:\n";
-			cout << "Container is filled:\n";
-		}
-		else
-		{
-			ofst << "Container is empty:\n";
-			cout << "Container is empty:\n";
-		}
-
-		WisdomItem* current = new WisdomItem;
-		for (int i = 0; i < l.size; i++)
-		{
-			l.Current = l.Current->Next;
-			current = (WisdomItem*)l.Current->item;
-
-			Writeinfo(*current, ofst, des);
-			current = nullptr;
-			delete current;
-
-		}
-
-		
-		string result = "----------------------------- \nThere are " + to_string(l.size) + " objects involving.\n";
-		cout << result;
-		ofst << result;
-		ofst.close();
+		ofst << "Container is empty:\n";
+		cout << "Container is empty:\n";
 	}
+
+	WisdomItem* current = new WisdomItem;
+	for (int i = 0; i < l.size; i++)
+	{
+		l.Current = l.Current->Next;
+		current = (WisdomItem*)l.Current->item;
+
+		Writeinfo(*current, ofst, des);
+		current = nullptr;
+		delete current;
+
+	}
+	string result = "----------------------------- \nThere are " + to_string(l.size) + " objects involving.\n";
+	cout << result;
+	ofst << result;
+	ofst.close();
+	
 }
 
 void Sort(List &l, int des)
@@ -282,10 +288,10 @@ void Sort(List &l, int des)
 		{
 			if (ptr != l.Tail->Next)
 			{
-
-				if (des == 0)
+				switch (des)
 				{
-
+				case 0:
+				{
 					if (!Compare(*s->item, *ptr->item))
 					{
 						temp = s->item;
@@ -293,15 +299,18 @@ void Sort(List &l, int des)
 						ptr->item = temp;
 					}
 				}
-				if (des == 1)
+				case 1:
 				{
-
 					if (Compare(*s->item, *ptr->item))
 					{
 						temp = s->item;
 						s->item = ptr->item;
 						ptr->item = temp;
 					}
+				}
+				default:
+					cout << "Wrong des in Sort function" << endl;
+					break;
 				}
 
 			}
