@@ -154,7 +154,10 @@ void Writeinfo(WisdomItem &wisd, ofstream &ofst, int des)
 			ofst << wisd.Text << endl;
 			OutA(*((Aforysm*)wisd.someType), cout);
 			cout << wisd.Text << endl;
-
+			ofst << "The grade of the following statement is: " << wisd.Grade << endl;
+			cout << "The grade of the following statement is: " << wisd.Grade << endl;
+			ofst << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
+			cout << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
 		}
 	}
 	if (des == 2)
@@ -166,8 +169,12 @@ void Writeinfo(WisdomItem &wisd, ofstream &ofst, int des)
 			
 			OutP(*((Poslovica*)wisd.someType), cout);
 			cout << wisd.Text << endl;
-
+			ofst << "The grade of the following statement is: " << wisd.Grade << endl;
+			cout << "The grade of the following statement is: " << wisd.Grade << endl;
+			ofst << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
+			cout << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
 		}
+
 	}
 	if (des == 3)
 	{
@@ -177,8 +184,12 @@ void Writeinfo(WisdomItem &wisd, ofstream &ofst, int des)
 			ofst << wisd.Text << endl;
 			OutR(*((Riddle*)wisd.someType), cout);
 			cout << wisd.Text << endl;
-
+			ofst << "The grade of the following statement is: " << wisd.Grade << endl;
+			cout << "The grade of the following statement is: " << wisd.Grade << endl;
+			ofst << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
+			cout << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
 		}
+		
 	}
 	if (des == 0)
 	{
@@ -206,11 +217,12 @@ void Writeinfo(WisdomItem &wisd, ofstream &ofst, int des)
 			cout << wisd.Text << endl;
 
 		}
+		ofst << "The grade of the following statement is: " << wisd.Grade << endl;
+		cout << "The grade of the following statement is: " << wisd.Grade << endl;
+		ofst << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
+		cout << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
 	}
-	ofst << "The grade of the following statement is: " << wisd.Grade << endl;
-	cout << "The grade of the following statement is: " << wisd.Grade << endl;
-	ofst << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
-	cout << "Quantity of special symbols in the folowing wisdom item: " << wisd.CountSighns(wisd.Text) << endl;
+	
 }
 
 void Out(List &l, ofstream &ofst, int des)
@@ -271,7 +283,7 @@ void Sort(List &l, int des)
 			if (ptr != l.Tail->Next)
 			{
 
-				if (des == 1)
+				if (des == 0)
 				{
 
 					if (!Compare(*s->item, *ptr->item))
@@ -281,7 +293,7 @@ void Sort(List &l, int des)
 						ptr->item = temp;
 					}
 				}
-				if (des == 2)
+				if (des == 1)
 				{
 
 					if (Compare(*s->item, *ptr->item))
