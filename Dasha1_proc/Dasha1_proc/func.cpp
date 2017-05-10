@@ -330,3 +330,128 @@ bool Compare(WisdomItem item1, WisdomItem item2)
 {
 	return item1.quantityOfSpecialSymbols < item2.quantityOfSpecialSymbols;
 }
+
+void Multimethod(List &l, ofstream &ofst)
+{
+	if (ofst.fail())
+	{
+		cerr << "Error: Unable to open output file" << endl;
+		return;
+	}
+	else
+	{
+		if (l.size)
+		{
+			ofst << "Multimethods:\n";
+			cout << "Multimethods:\n";
+		}
+		else
+		{
+			ofst << "Container is empty:\n";
+			cout << "Container is empty:\n";
+		}
+
+		List::node* currentNode = nullptr;
+		for (int i = 0; i < l.size; i++)
+		{
+			l.current = l.current->next;
+			currentNode = l.current;
+			for (int j = 0; j < l.size; j++)
+			{
+				switch (l.current->item->k)
+				{
+				case AFORYSM:
+				{
+					switch (currentNode->item->k)
+					{
+					case AFORYSM:
+					{
+						ofst << "Aforysm and Aforysm:\n";
+						cout << "Aforysm and Aforysm:\n";
+						break;
+					}
+					case POSLOVICA:
+					{
+						ofst << "Aforysm and Poslovica:\n";
+						cout << "Aforysm and Posovica:\n";
+						break;
+					}
+					case RIDDLE:
+					{
+						ofst << "Aforysm and Riddle:\n";
+						cout << "Aforysm and Riddle:\n";
+						break;
+					}
+					default:
+						break;
+					}
+					break;
+				}
+				case POSLOVICA:
+				{
+					switch (currentNode->item->k)
+					{
+					case AFORYSM:
+					{
+						ofst << "Poslovica and Aforysm:\n";
+						cout << "Poslovica and Aforysm:\n";
+						break;
+					}
+					case POSLOVICA:
+					{
+						ofst << "Poslovica and Poslovica:\n";
+						cout << "Poslovica and Poslovica:\n";
+						break;
+					}
+					case RIDDLE:
+					{
+						ofst << "Poslovica and Riddle:\n";
+						cout << "Poslovica and Riddle:\n";
+						break;
+					}
+					default:
+						break;
+					}
+					break;
+				}
+				case RIDDLE:
+				{
+					switch (currentNode->item->k)
+					{
+					case AFORYSM:
+					{
+						ofst << "Riddle and Aforysm:\n";
+						cout << "Riddle and Aforysm:\n";
+						break;
+					}
+					case POSLOVICA:
+					{
+						ofst << "Riddle and Poslovica:\n";
+						cout << "Riddle and Poslovica:\n";
+						break;
+					}
+					case RIDDLE:
+					{
+						ofst << "Riddle and Riddle:\n";
+						cout << "Riddle and Riddle:\n";
+						break;
+					}
+					default:
+						break;
+					}
+					break;
+				}
+				default:
+					break;
+				}
+
+				Writeinfo(*l.current->item, ofst, 0);
+				Writeinfo(*currentNode->item, ofst, 0);
+				ofst << endl;
+				cout << endl;
+				currentNode = currentNode->next;
+			}
+		}
+		ofst.close();
+	}
+}

@@ -73,3 +73,4 @@ void Out(List &l, ofstream &ofst, int des);
 
 void Sort(List &l,int des);
 bool Compare(WisdomItem item1, WisdomItem item2);
+void Multimethod(List &l, ofstream &ofst);
